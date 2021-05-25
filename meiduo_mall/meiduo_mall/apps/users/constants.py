@@ -1,0 +1,5 @@
+# 邮件激活连接的有效期是一天
+VERIFY_EMAIL_TOKEN_EXPIRES = 60 * 60 * 24
+
+# 用户最多地址数量
+USER_ADDRESS_COUNTS_LIMIT = 20
