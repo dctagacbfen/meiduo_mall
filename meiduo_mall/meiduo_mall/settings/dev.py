@@ -52,6 +52,8 @@ INSTALLED_APPS = [
 
     'rest_framework', # DRF
     'corsheaders', # cors
+    'ckeditor',  # 富文本编辑器
+    'ckeditor_uploader',  # 富文本编辑器上传图片模块
 
     'users.apps.UsersConfig', # 注册用户模块，为了适应AUTH_USER_MODEL的配置，所以需要以users开头
     'oauth.apps.OauthConfig', # 第三方登录模块

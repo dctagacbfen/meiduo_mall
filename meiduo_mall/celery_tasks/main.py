@@ -8,7 +8,7 @@ if not os.getenv('DJANGO_SETTINGS_MODULE'):
     os.environ['DJANGO_SETTINGS_MODULE'] = 'meiduo_mall.settings.dev'
 
 # 创建celery实例:参数是celery的别名，没有实际的意义
-celery_app = Celery('meiduo_03')
+celery_app = Celery('meiduo_mall')
 
 # 加载配置
 celery_app.config_from_object('celery_tasks.config')
