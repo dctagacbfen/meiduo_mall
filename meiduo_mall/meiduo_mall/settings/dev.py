@@ -16,8 +16,8 @@ import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# /Users/zhangjie/Desktop/meiduo_03/meiduo_mall/meiduo_mall
-# print(BASE_DIR)
+# /home/python/Desktop/meiduo_mall/meiduo_mall/meiduo_mall
+print(BASE_DIR)
 
 # 查看项目的导包路径
 
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'corsheaders', # cors
     'ckeditor',  # 富文本编辑器
     'ckeditor_uploader',  # 富文本编辑器上传图片模块
+    'django_crontab',  # 定时任务
 
     'users.apps.UsersConfig', # 注册用户模块，为了适应AUTH_USER_MODEL的配置，所以需要以users开头
     'oauth.apps.OauthConfig', # 第三方登录模块
@@ -78,7 +79,7 @@ ROOT_URLCONF = 'meiduo_mall.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -302,3 +303,21 @@ CKEDITOR_CONFIGS = {
     },
 }
 CKEDITOR_UPLOAD_PATH = ''  # 上传图片保存路径，使用了FastDFS，所以此处设为''
+
+# 生成的静态html文件保存目录
+GENERATED_STATIC_HTML_FILES_DIR = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), 'front_end_pc')
+
+# print(GENERATED_STATIC_HTML_FILES_DIR)
+
+
+# 定时任务
+CRONJOBS = [
+    # 每5分钟执行一次生成主页静态文件
+    ('*/2 * * * *', 'contents.crons.generate_static_index_html', '>> /home/python/Desktop/meiduo_mall/meiduo_mall/logs/crontab.log')
+]
+
+# 解决crontab中文问题
+CRONTAB_COMMAND_PREFIX = 'LANG_ALL=zh_cn.UTF-8'
+
+
+
